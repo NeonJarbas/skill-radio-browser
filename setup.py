@@ -14,7 +14,7 @@ setup(
     author_email='jarbasai@mailfence.com',
     license='Apache-2.0',
     package_dir={"skill_radio_browser": ""},
-    package_data={'skill_radio_browser': ['locale/*', 'ui/*']},
+    package_data={'skill_radio_browser': ['locale/*', 'res/*']},
     packages=['skill_radio_browser'],
     include_package_data=True,
     install_requires=["ovos_workshop~=0.0.5a7", "radio_browser~=0.0.1"],

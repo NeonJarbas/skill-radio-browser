@@ -1,18 +1,19 @@
 from os.path import join, dirname
 
-from ovos_utils.parse import fuzzy_match, MatchStrategy
-from ovos_workshop.skills.common_play import OVOSCommonPlaybackSkill, \
-    MediaType, PlaybackType, ocp_search
 from radio_browser import RadioBrowser
+
+from ovos_utils.ocp import MediaType, PlaybackType
+from ovos_utils.parse import fuzzy_match, MatchStrategy
+from ovos_workshop.decorators.ocp import ocp_search
+from ovos_workshop.skills.common_play import OVOSCommonPlaybackSkill
 
 
 class RadioBrowserSkill(OVOSCommonPlaybackSkill):
-    def __init__(self):
-        super().__init__("RadioBrowser")
-        self.supported_media = [MediaType.GENERIC,
-                                MediaType.MUSIC,
+    def __init__(self, *args, **kwargs):
+        self.supported_media = [MediaType.MUSIC,
                                 MediaType.RADIO]
-        self.skill_icon = join(dirname(__file__), "ui", "logo.png")
+        self.skill_icon = join(dirname(__file__), "res", "logo.png")
+        super().__init__(*args, **kwargs)
 
     def calc_score(self, phrase, match, idx=0, base_score=0):
         # idx represents the order from search
@@ -47,7 +48,3 @@ class RadioBrowserSkill(OVOSCommonPlaybackSkill):
                 "title": ch["name"],
                 "length": 0
             }
-
-
-def create_skill():
-    return RadioBrowserSkill()
